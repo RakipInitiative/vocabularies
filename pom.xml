@@ -4,13 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.bund.bfr.rakip</groupId>
 	<artifactId>vocabularies</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<distributionManagement>
+		<repository>
+			<id>bintray</id>
+			<url>https://api.bintray.com/maven/silebat/maven_repo/vocabularies/;publish=1</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -43,5 +50,5 @@
 		</dependency>
 
 	</dependencies>
-</project>
 
+</project>
