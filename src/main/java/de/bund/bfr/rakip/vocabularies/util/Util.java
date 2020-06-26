@@ -3,19 +3,12 @@ package de.bund.bfr.rakip.vocabularies.util;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import de.bund.bfr.rakip.vocabularies.data.RightRepository;
-import de.bund.bfr.rakip.vocabularies.domain.Right;
 
 public class Util {
 
@@ -59,25 +52,6 @@ public class Util {
 				}
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
-			}
-		}
-	}
-
-	// Example application for a future Jetty server. (To be removed)
-	public static void main(String[] args) throws SQLException, IOException, JsonProcessingException {
-
-		Connection connection = DriverManager.getConnection("jdbc:h2:mem:");
-		loadInitialData(connection);
-
-		RightRepository rightRepository = new RightRepository(connection);
-		Right[] rights = rightRepository.getAll();
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		for (Right right : rights) {
-			try {
-				System.out.println(objectMapper.writeValueAsString(right));
-			} catch (Exception e) {
-				// do nothing
 			}
 		}
 	}
