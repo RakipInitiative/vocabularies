@@ -56,4 +56,20 @@ public class LanguageRepository implements BasicRepository<Language> {
 
 		return languageList.toArray(new Language[0]);
 	}
+	
+    @Override
+    public String[] getAllNames() {
+    	ArrayList<String> names = new ArrayList<>();
+    	
+    	try {
+    		Statement statement = connection.createStatement();
+    		ResultSet resultSet = statement.executeQuery("SELECT name FROM language");
+    		
+    		while (resultSet.next()) {
+    			names.add(resultSet.getString("name"));
+    		}
+    	} catch (SQLException e) {}
+    	
+    	return names.toArray(new String[0]);
+    }
 }

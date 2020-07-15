@@ -79,4 +79,18 @@ public class UnitCategoryRepositoryTest {
 		UnitCategoryRepository repository = new UnitCategoryRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		UnitCategoryRepository repository = new UnitCategoryRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		UnitCategoryRepository repository = new UnitCategoryRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

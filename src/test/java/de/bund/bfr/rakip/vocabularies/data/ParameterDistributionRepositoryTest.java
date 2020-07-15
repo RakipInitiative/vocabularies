@@ -83,4 +83,18 @@ public class ParameterDistributionRepositoryTest {
 		ParameterDistributionRepository repository = new ParameterDistributionRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		ParameterDistributionRepository repository = new ParameterDistributionRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		ParameterDistributionRepository repository = new ParameterDistributionRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

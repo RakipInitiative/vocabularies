@@ -83,4 +83,18 @@ public class RightRepositoryTest {
 		RightRepository repository = new RightRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		RightRepository repository = new RightRepository(connection);
+		assertEquals("fullname", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		RightRepository repository = new RightRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

@@ -79,4 +79,18 @@ public class ProductTreatmentRepositoryTest {
 		ProductTreatmentRepository repository = new ProductTreatmentRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		ProductTreatmentRepository repository = new ProductTreatmentRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		ProductTreatmentRepository repository = new ProductTreatmentRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

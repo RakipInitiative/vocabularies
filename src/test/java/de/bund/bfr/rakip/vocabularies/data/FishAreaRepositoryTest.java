@@ -1,9 +1,7 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -81,5 +79,19 @@ public class FishAreaRepositoryTest {
 		Connection closedConnection = TestUtils.mockClosedConnection();
 		FishAreaRepository repository = new FishAreaRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
+	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked fish areas
+		FishAreaRepository repository = new FishAreaRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		FishAreaRepository repository = new FishAreaRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
 	}
 }

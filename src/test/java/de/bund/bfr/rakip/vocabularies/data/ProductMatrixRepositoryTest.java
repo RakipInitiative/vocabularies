@@ -83,4 +83,18 @@ public class ProductMatrixRepositoryTest {
 		ProductMatrixRepository repository = new ProductMatrixRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		ProductMatrixRepository repository = new ProductMatrixRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		ProductMatrixRepository repository = new ProductMatrixRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

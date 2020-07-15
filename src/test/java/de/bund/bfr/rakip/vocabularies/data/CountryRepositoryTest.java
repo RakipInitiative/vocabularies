@@ -1,9 +1,7 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -73,7 +71,6 @@ public class CountryRepositoryTest {
 	
 	@Test
 	public void testGetAll()  {
-		
 		// Get mocked countries
 		CountryRepository repository = new CountryRepository(connection);
 		assertTrue(repository.getAll().length > 0);
@@ -84,5 +81,19 @@ public class CountryRepositoryTest {
 		Connection closedConnection = TestUtils.mockClosedConnection();
 		CountryRepository repository = new CountryRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
+	}
+	
+	@Test
+	public void testGetAllNames() {
+		// Get mocked countries
+		CountryRepository repository = new CountryRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		CountryRepository repository = new CountryRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
 	}
 }

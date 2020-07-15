@@ -81,4 +81,18 @@ public class PublicationTypeRepositoryTest {
 		PublicationTypeRepository repository = new PublicationTypeRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		PublicationTypeRepository repository = new PublicationTypeRepository(connection);
+		assertEquals("fullName", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		PublicationTypeRepository repository = new PublicationTypeRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

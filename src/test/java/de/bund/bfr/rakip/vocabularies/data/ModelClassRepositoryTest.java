@@ -82,4 +82,18 @@ public class ModelClassRepositoryTest {
 		ModelClassRepository repository = new ModelClassRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		ModelClassRepository repository = new ModelClassRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		ModelClassRepository repository = new ModelClassRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

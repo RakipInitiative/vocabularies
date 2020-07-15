@@ -81,4 +81,18 @@ public class StatusRepositoryTest {
 		StatusRepository repository = new StatusRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		StatusRepository repository = new StatusRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		StatusRepository repository = new StatusRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

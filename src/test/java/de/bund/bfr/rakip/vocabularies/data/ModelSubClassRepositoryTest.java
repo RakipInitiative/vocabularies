@@ -93,4 +93,18 @@ public class ModelSubClassRepositoryTest {
 		ModelSubclassRepository repository = new ModelSubclassRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		ModelSubclassRepository repository = new ModelSubclassRepository(connection);
+		assertEquals("submodel", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		ModelSubclassRepository repository = new ModelSubclassRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

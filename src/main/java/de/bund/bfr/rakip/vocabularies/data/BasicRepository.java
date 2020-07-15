@@ -7,4 +7,6 @@ public interface BasicRepository<T> {
     Optional<T> getById(int id);
 
     T[] getAll();
+    
+    String[] getAllNames();
 }

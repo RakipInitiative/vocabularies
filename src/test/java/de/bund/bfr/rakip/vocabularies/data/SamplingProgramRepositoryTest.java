@@ -81,4 +81,18 @@ public class SamplingProgramRepositoryTest {
 		SamplingProgramRepository repository = new SamplingProgramRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		SamplingProgramRepository repository = new SamplingProgramRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		SamplingProgramRepository repository = new SamplingProgramRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

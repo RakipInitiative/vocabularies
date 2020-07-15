@@ -82,4 +82,18 @@ public class HazardTypeRepositoryTest {
 		HazardTypeRepository repository = new HazardTypeRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		HazardTypeRepository repository = new HazardTypeRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		HazardTypeRepository repository = new HazardTypeRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

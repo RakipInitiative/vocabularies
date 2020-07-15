@@ -59,4 +59,20 @@ public class RightRepository implements BasicRepository<Right> {
 
 		return rightList.toArray(new Right[0]);
 	}
+	
+    @Override
+    public String[] getAllNames() {
+    	ArrayList<String> names = new ArrayList<>();
+    	
+    	try {
+    		Statement statement = connection.createStatement();
+    		ResultSet resultSet = statement.executeQuery("SELECT fullname FROM rights");
+    		
+    		while (resultSet.next()) {
+    			names.add(resultSet.getString("fullname"));
+    		}
+    	} catch (SQLException e) {}
+    	
+    	return names.toArray(new String[0]);
+    }
 }

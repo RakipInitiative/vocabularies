@@ -85,4 +85,18 @@ public class PackagingRepositoryTest {
 		PackagingRepository repository = new PackagingRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
 	}
+	
+	@Test
+	public void testGetAllNames() throws Exception {
+		// Get mocked hazards
+		PackagingRepository repository = new PackagingRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		PackagingRepository repository = new PackagingRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
+	}
 }

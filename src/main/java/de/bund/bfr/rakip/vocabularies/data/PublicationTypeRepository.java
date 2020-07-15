@@ -57,4 +57,20 @@ public class PublicationTypeRepository implements BasicRepository<PublicationTyp
 
 		return typeList.toArray(new PublicationType[0]);
 	}
+	
+    @Override
+    public String[] getAllNames() {
+    	ArrayList<String> names = new ArrayList<>();
+    	
+    	try {
+    		Statement statement = connection.createStatement();
+    		ResultSet resultSet = statement.executeQuery("SELECT fullName FROM publication_type");
+    		
+    		while (resultSet.next()) {
+    			names.add(resultSet.getString("fullName"));
+    		}
+    	} catch (SQLException e) {}
+    	
+    	return names.toArray(new String[0]);
+    }
 }

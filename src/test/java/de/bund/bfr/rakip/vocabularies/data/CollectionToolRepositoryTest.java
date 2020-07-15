@@ -1,9 +1,7 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -80,5 +78,19 @@ public class CollectionToolRepositoryTest {
 		Connection closedConnection = TestUtils.mockClosedConnection();
 		CollectionToolRepository repository = new CollectionToolRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
+	}
+	
+	@Test
+	public void testGetAllNames() {
+		// Get mocked collection tools
+		CollectionToolRepository repository = new CollectionToolRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws Exception {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		CollectionToolRepository repository = new CollectionToolRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
 	}
 }

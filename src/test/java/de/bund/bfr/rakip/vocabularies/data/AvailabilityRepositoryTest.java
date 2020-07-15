@@ -1,9 +1,7 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -83,5 +81,19 @@ public class AvailabilityRepositoryTest {
 		Connection closedConnection = TestUtils.mockClosedConnection();
 		AvailabilityRepository repository = new AvailabilityRepository(closedConnection);
 		assertEquals(0, repository.getAll().length);
+	}
+	
+	@Test
+	public void testGetAllNames() {
+		// Get mocked availabilities
+		AvailabilityRepository repository = new AvailabilityRepository(connection);
+		assertEquals("name", repository.getAllNames()[0]);
+	}
+	
+	@Test
+	public void testGetAllNames_ClosedConnection_ShouldReturnEmptyArray() throws SQLException {
+		Connection closedConnection = TestUtils.mockClosedConnection();
+		AvailabilityRepository repository = new AvailabilityRepository(closedConnection);
+		assertEquals(0, repository.getAllNames().length);
 	}
 }
