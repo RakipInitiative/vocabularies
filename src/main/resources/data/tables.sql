@@ -222,7 +222,14 @@ CREATE TABLE unit (
 -- Study assay technology type
 CREATE TABLE technology_type (
     id INTEGER NOT NULL,
-    ssd VARCHAR(5) NOT NULL,
+    ssd VARCHAR(6) NOT NULL,
     name VARCHAR(128) NOT NULL,
     comment VARCHAR(256),
+    PRIMARY KEY(id));
+
+-- SSD MDSTAT (xs:string(5))
+CREATE TABLE accreditation_procedure (
+    id INTEGER NOT NULL,
+    mdstat VARCHAR(5) NOT NULL, 
+    name VARCHAR(50),
     PRIMARY KEY(id));
