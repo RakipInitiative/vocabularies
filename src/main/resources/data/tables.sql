@@ -233,3 +233,9 @@ CREATE TABLE accreditation_procedure (
     mdstat VARCHAR(5) NOT NULL, 
     name VARCHAR(50),
     PRIMARY KEY(id));
+
+CREATE TABLE parameter_classification (
+	id INTEGER NOT NULL,
+	name VARCHAR(10) NOT NULL,
+	comment VARCHAR(256),
+	PRIMARY KEY(id));
