@@ -74,6 +74,13 @@ CREATE TABLE model_subclass (
     PRIMARY KEY(id),
     FOREIGN KEY(class_id) REFERENCES model_class(id));
     
+CREATE TABLE basic_process (
+	id INTEGER NOT NULL,
+	name VARCHAR(128) NOT NULL,
+	class_id INTEGER NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY(class_id) REFERENCES model_class(id));
+    
 CREATE TABLE model_equation_class (
     id INTEGER NOT NULL,
     name VARCHAR(255),
