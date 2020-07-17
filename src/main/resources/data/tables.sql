@@ -218,3 +218,11 @@ CREATE TABLE unit (
     category_id INTEGER,
     PRIMARY KEY(id),
     FOREIGN KEY(category_id) REFERENCES unit_category(id));
+    
+-- Study assay technology type
+CREATE TABLE technology_type (
+    id INTEGER NOT NULL,
+    ssd VARCHAR(5) NOT NULL,
+    name VARCHAR(128) NOT NULL,
+    comment VARCHAR(256),
+    PRIMARY KEY(id));
