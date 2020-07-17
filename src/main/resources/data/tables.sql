@@ -239,3 +239,9 @@ CREATE TABLE parameter_classification (
 	name VARCHAR(10) NOT NULL,
 	comment VARCHAR(256),
 	PRIMARY KEY(id));
+
+CREATE TABLE parameter_datatype (
+	id INTEGER NOT NULL,
+	name VARCHAR(16) NOT NULL,
+	comment VARCHAR(300),
+	represented_as VARCHAR(8));
