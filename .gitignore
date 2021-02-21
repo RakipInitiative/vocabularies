@@ -28,3 +28,7 @@ target
 # Eclipse and Visual Studio Code .settings and .project
 .settings
 .project
+
+# IntelliJ IDEA
+.idea
+vocabularies.iml
