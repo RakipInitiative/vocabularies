@@ -1,6 +1,11 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class Language {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class Language implements FskmlObject {
 
     private final int id;
 
@@ -9,7 +14,10 @@ public class Language {
 
     private final String name;
 
-    public Language(int id, String code, String name) {
+    @JsonCreator
+    public Language(@JsonProperty("id") int id,
+                    @JsonProperty("code") String code,
+                    @JsonProperty("name") String name) {
         this.id = id;
         this.code = code;
         this.name = name;

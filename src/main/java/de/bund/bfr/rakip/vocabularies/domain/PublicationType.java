@@ -1,12 +1,20 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class PublicationType {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class PublicationType implements FskmlObject {
 
     private final int id;
     private final String shortName;
     private final String fullName;
- 
-    public PublicationType(int id, String shortName, String fullName) {
+
+    @JsonCreator
+    public PublicationType(@JsonProperty("id") int id,
+                           @JsonProperty("shortName") String shortName,
+                           @JsonProperty("fullName") String fullName) {
         this.id = id;
         this.shortName = shortName;
         this.fullName = fullName;

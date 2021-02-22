@@ -1,11 +1,18 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class Software {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class Software implements FskmlObject {
 
     private final int id;
     private final String name;
 
-    public Software(int id, String name) {
+    @JsonCreator
+    public Software(@JsonProperty("id") int id,
+                    @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }

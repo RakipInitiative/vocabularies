@@ -1,12 +1,20 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class Status {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class Status implements FskmlObject {
 
     private final int id;
     private final String name;
     private final String comment;
 
-    public Status(int id, String name, String comment) {
+    @JsonCreator
+    public Status(@JsonProperty("id") int id,
+                  @JsonProperty("name") String name,
+                  @JsonProperty("comment") String comment) {
         this.id = id;
         this.name = name;
         this.comment = comment;

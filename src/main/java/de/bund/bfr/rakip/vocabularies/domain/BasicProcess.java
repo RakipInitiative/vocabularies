@@ -1,12 +1,20 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class BasicProcess {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class BasicProcess implements FskmlObject {
 
     private final int id;
     private final String name;
     private final ModelClass classCategory;
 
-    public BasicProcess(int id, String name, ModelClass classCategory) {
+    @JsonCreator
+    public BasicProcess(@JsonProperty("id") int id,
+                        @JsonProperty("name") String name,
+                        @JsonProperty("classCategory") ModelClass classCategory) {
         this.id = id;
         this.name = name;
         this.classCategory = classCategory;

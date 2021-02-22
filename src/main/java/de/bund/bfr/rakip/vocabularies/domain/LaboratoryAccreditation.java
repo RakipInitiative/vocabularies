@@ -1,12 +1,21 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class LaboratoryAccreditation {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class LaboratoryAccreditation implements FskmlObject {
 
     private final int id;
     private final String name;
     private final String ssd;
 
-    public LaboratoryAccreditation(int id, String name, String ssd) {
+    @JsonCreator
+    public LaboratoryAccreditation(
+            @JsonProperty("id") int id,
+            @JsonProperty("name") String name,
+            @JsonProperty("ssd") String ssd) {
         this.id = id;
         this.name = name;
         this.ssd = ssd;

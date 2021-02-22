@@ -1,13 +1,22 @@
 package de.bund.bfr.rakip.vocabularies.domain;
 
-public class ProductMatrix {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+public class ProductMatrix implements FskmlObject {
 
     private final int id;
     private final String ssd;
     private final String name;
     private final String comment;
 
-    public ProductMatrix(int id, String ssd, String name, String comment) {
+    @JsonCreator
+    public ProductMatrix(@JsonProperty("id") int id,
+                         @JsonProperty("ssd") String ssd,
+                         @JsonProperty("name") String name,
+                         @JsonProperty("comment") String comment) {
         this.id = id;
         this.ssd = ssd;
         this.name = name;
