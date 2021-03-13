@@ -7,3 +7,5 @@ INSERT INTO software (id, name) VALUES (3, 'MicroHibro');
 INSERT INTO software (id, name) VALUES (9, 'Other Software');
 INSERT INTO software (id, name) VALUES (2, 'PMM-Lab');
 INSERT INTO software (id, name) VALUES (4, 'R');
+INSERT INTO language_written_in (id, name) VALUES (60, 'SAS');
+INSERT INTO language_written_in (id, name) VALUES (60, 'Stata');
