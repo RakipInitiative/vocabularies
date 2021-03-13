@@ -54,3 +54,4 @@ INSERT INTO language_written_in (id, name) VALUES (54, '@Risk 5');
 INSERT INTO language_written_in (id, name) VALUES (55, '@Risk 6');
 INSERT INTO language_written_in (id, name) VALUES (56, '@Risk 7.5');
 INSERT INTO language_written_in (id, name) VALUES (57, 'Other');
+INSERT INTO language_written_in (id, name) VALUES (58, 'R 4');
