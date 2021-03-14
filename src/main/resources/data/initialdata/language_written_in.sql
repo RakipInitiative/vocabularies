@@ -57,4 +57,4 @@ INSERT INTO language_written_in (id, name) VALUES (57, 'Other');
 INSERT INTO language_written_in (id, name) VALUES (58, 'R 4');
 INSERT INTO language_written_in (id, name) VALUES (59, 'R & OpenBUGS');
 INSERT INTO language_written_in (id, name) VALUES (60, 'SAS');
-INSERT INTO language_written_in (id, name) VALUES (60, 'Stata');
+INSERT INTO language_written_in (id, name) VALUES (61, 'Stata');
