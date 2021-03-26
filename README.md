@@ -1,4 +1,4 @@
-# vocabularies [![Build Status](https://travis-ci.org/RakipInitiative/vocabularies.svg?branch=master)](https://travis-ci.org/RakipInitiative/vocabularies) [![codecov](https://codecov.io/gh/RakipInitiative/vocabularies/branch/master/graph/badge.svg?token=5EK0L1QYBT)](https://codecov.io/gh/RakipInitiative/vocabularies)
+# vocabularies [![Build Status](https://travis-ci.org/RakipInitiative/vocabularies.svg?branch=master)](https://travis-ci.org/RakipInitiative/vocabularies) [![codecov](https://codecov.io/gh/RakipInitiative/vocabularies/branch/master/graph/badge.svg?token=5EK0L1QYBT)](https://codecov.io/gh/RakipInitiative/vocabularies) [![Maintainability](https://api.codeclimate.com/v1/badges/544b838924b64616c230/maintainability)](https://codeclimate.com/github/RakipInitiative/vocabularies/maintainability)
 
 Library with RAKIP vocabularies database. It is to be used by the BfR server and KNIME.
 
