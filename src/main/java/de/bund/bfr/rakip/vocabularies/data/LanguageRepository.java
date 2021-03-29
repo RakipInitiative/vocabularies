@@ -19,15 +19,16 @@ public class LanguageRepository implements BasicRepository<Language> {
 		String query = "SELECT * FROM language WHERE id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
-			ResultSet resultSet = statement.executeQuery();
 
-			if (resultSet.next()) {
-				String code = resultSet.getString("code");
-				String name = resultSet.getString("name");
-				return Optional.of(new Language(id, code, name));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String code = resultSet.getString("code");
+					String name = resultSet.getString("name");
+					return Optional.of(new Language(id, code, name));
+				}
 			}
-			return Optional.empty();
 
+			return Optional.empty();
 		}
 		catch (SQLException err) {
 			return Optional.empty();
