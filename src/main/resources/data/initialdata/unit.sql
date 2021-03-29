@@ -320,3 +320,6 @@ INSERT INTO unit (id, name, ssd, comment, category_id) VALUES (292, 'µS/cm', 'G
 INSERT INTO unit (id, name, comment, category_id) VALUES (293, 'µs²', 'µs²', 25);
 INSERT INTO unit (id, name, comment, category_id) VALUES (294, 'Larva per 50g', '', 4);
 INSERT INTO unit (id, name, comment, category_id) VALUES (295, 'Number of persons', '', 1);
+INSERT INTO unit (id, name, comment, category_id) VALUES (296, 'Ton', '', 18);
+INSERT INTO unit (id, name, comment, category_id) VALUES (297, 'Number of eggs', '', 19);
+INSERT INTO unit (id, name, comment, category_id) VALUES (298, 'Number of cases', '', 19);
