@@ -318,3 +318,5 @@ INSERT INTO unit (id, name, comment, category_id) VALUES (290, 'µL/mL', 'microl
 INSERT INTO unit (id, name, ssd, comment, category_id) VALUES (291, 'µS', 'G113A', 'Microsiemens', 7);
 INSERT INTO unit (id, name, ssd, comment, category_id) VALUES (292, 'µS/cm', 'G056A', 'Microsiemens/centimetre', 25);
 INSERT INTO unit (id, name, comment, category_id) VALUES (293, 'µs²', 'µs²', 25);
+INSERT INTO unit (id, name, comment, category_id) VALUES (294, 'Larva per 50g', '', 4);
+INSERT INTO unit (id, name, comment, category_id) VALUES (295, 'Number of persons', '', 1);
