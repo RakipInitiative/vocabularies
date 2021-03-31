@@ -1,4 +1,4 @@
-# vocabularies [![Java CI](https://github.com/RakipInitiative/vocabularies/actions/workflows/basic.yml/badge.svg)](https://github.com/RakipInitiative/vocabularies/actions/workflows/basic.yml) [![codecov](https://codecov.io/gh/RakipInitiative/vocabularies/branch/master/graph/badge.svg?token=5EK0L1QYBT)](https://codecov.io/gh/RakipInitiative/vocabularies) [![Maintainability](https://api.codeclimate.com/v1/badges/544b838924b64616c230/maintainability)](https://codeclimate.com/github/RakipInitiative/vocabularies/maintainability)
+# vocabularies [![Java CI](https://github.com/RakipInitiative/vocabularies/actions/workflows/basic.yml/badge.svg)](https://github.com/RakipInitiative/vocabularies/actions/workflows/basic.yml) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=RakipInitiative_vocabularies&metric=bugs)](https://sonarcloud.io/dashboard?id=RakipInitiative_vocabularies)
 
 Library with RAKIP vocabularies database. It is to be used by the BfR server and KNIME.
 
