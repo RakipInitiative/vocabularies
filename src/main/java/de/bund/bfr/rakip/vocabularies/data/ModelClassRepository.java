@@ -16,7 +16,7 @@ public class ModelClassRepository implements BasicRepository<ModelClass> {
 
 	@Override
 	public Optional<ModelClass> getById(int id) {
-		
+
 		String query = "SELECT * FROM model_class WHERE id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
