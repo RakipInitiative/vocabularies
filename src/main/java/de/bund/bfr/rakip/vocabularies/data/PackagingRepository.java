@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,18 @@ public class PackagingRepository implements BasicRepository<Packaging> {
 	@Override
 	public Optional<Packaging> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM packaging WHERE id = " + id);
+		String query = "SELECT * FROM packaging WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String ssd = resultSet.getString("ssd");
-				String comment = resultSet.getString("comment");
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String ssd = resultSet.getString("ssd");
+					String comment = resultSet.getString("comment");
 
-				return Optional.of(new Packaging(id, name, ssd, comment));
+					return Optional.of(new Packaging(id, name, ssd, comment));
+				}
 			}
 			return Optional.empty();
 		} catch (SQLException err) {
