@@ -58,9 +58,8 @@ public class ModelEquationClassRepository implements BasicRepository<ModelEquati
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM model_equation_class");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM model_equation_class")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

@@ -42,10 +42,8 @@ public class TechnologyTypeRepository implements BasicRepository<TechnologyType>
     	
         ArrayList<TechnologyType> typeList = new ArrayList<>();
     	
-		try {
-			Statement statement = connection.createStatement();
-			
-	        ResultSet resultSet = statement.executeQuery("SELECT * FROM technology_type");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM technology_type")) {
 
 	        while (resultSet.next()) {
 	            int id = resultSet.getInt("id");

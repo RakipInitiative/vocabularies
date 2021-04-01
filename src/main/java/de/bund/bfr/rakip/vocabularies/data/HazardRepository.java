@@ -59,9 +59,8 @@ public class HazardRepository implements BasicRepository<Hazard> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM hazard");
+    	try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT name FROM hazard")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

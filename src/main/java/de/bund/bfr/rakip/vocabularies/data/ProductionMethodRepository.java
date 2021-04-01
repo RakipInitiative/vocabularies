@@ -62,9 +62,8 @@ public class ProductionMethodRepository implements BasicRepository<ProductionMet
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM prodmeth");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM prodmeth")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));
