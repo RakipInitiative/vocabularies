@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,19 @@ public class RegionRepository implements BasicRepository<Region> {
 	@Override
 	public Optional<Region> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM region WHERE id = " + id);
+		String query = "SELECT * FROM region WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String ssd = resultSet.getString("nuts");
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String ssd = resultSet.getString("nuts");
 
-				return Optional.of(new Region(id, name, ssd));
+					return Optional.of(new Region(id, name, ssd));
+				}
 			}
+
 			return Optional.empty();
 		} catch (SQLException err) {
 			return Optional.empty();
