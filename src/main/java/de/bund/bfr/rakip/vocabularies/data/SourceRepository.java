@@ -16,7 +16,7 @@ public class SourceRepository implements BasicRepository<Source> {
 
 	@Override
 	public Optional<Source> getById(int id) {
-		
+
 		String query = "SELECT * FROM sources WHERE id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
