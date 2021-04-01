@@ -1,13 +1,13 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import de.bund.bfr.rakip.vocabularies.domain.IndSum;
 import de.bund.bfr.rakip.vocabularies.domain.LaboratoryAccreditation;
+
+import javax.xml.transform.Result;
 
 public class LaboratoryAccreditationRepository implements BasicRepository<LaboratoryAccreditation> {
 
@@ -19,16 +19,18 @@ public class LaboratoryAccreditationRepository implements BasicRepository<Labora
 
 	@Override
 	public Optional<LaboratoryAccreditation> getById(int id) {
+		
+		String query = "SELECT * FROM laboratory_accreditation WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM laboratory_accreditation WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String ssd = resultSet.getString("ssd");
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String ssd = resultSet.getString("ssd");
-
-				return Optional.of(new LaboratoryAccreditation(id, name, ssd));
+					return Optional.of(new LaboratoryAccreditation(id, name, ssd));
+				}
 			}
 			return Optional.empty();
 		} catch (SQLException err) {
