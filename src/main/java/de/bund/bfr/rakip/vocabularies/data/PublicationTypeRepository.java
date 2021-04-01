@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,19 @@ public class PublicationTypeRepository implements BasicRepository<PublicationTyp
 	@Override
 	public Optional<PublicationType> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM publication_type WHERE id = '" + id + "'");
+		String query = "SELECT * FROM publication_type WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String shortName = resultSet.getString("shortName");
-				String fullName = resultSet.getString("fullName");
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String shortName = resultSet.getString("shortName");
+					String fullName = resultSet.getString("fullName");
 
-				return Optional.of(new PublicationType(id, shortName, fullName));
+					return Optional.of(new PublicationType(id, shortName, fullName));
+				}
 			}
+
 			return Optional.empty();
 		} catch (SQLException err) {
 			return Optional.empty();
