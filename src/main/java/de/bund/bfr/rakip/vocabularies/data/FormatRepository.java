@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,18 +17,22 @@ public class FormatRepository implements BasicRepository<Format> {
 	@Override
 	public Optional<Format> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM format WHERE id = " + id);
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String comment = resultSet.getString("comment");
+		String query = "SELECT * FROM format WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-				return Optional.of(new Format(id, name, comment));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String comment = resultSet.getString("comment");
+
+					return Optional.of(new Format(id, name, comment));
+				}
 			}
 
 			return Optional.empty();
-		} catch (SQLException e) {
+
+		} catch (SQLException err) {
 			return Optional.empty();
 		}
 	}
