@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,19 +17,19 @@ public class IndSumRepository implements BasicRepository<IndSum> {
 	@Override
 	public Optional<IndSum> getById(int id) {
 
-		try {
+		String query = "SELECT * FROM ind_sum WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM ind_sum WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String ssd = resultSet.getString("ssd");
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String ssd = resultSet.getString("ssd");
-
-				return Optional.of(new IndSum(id, name, ssd));
+					return Optional.of(new IndSum(id, name, ssd));
+				}
 			}
 			return Optional.empty();
-
 		} catch (SQLException err) {
 			return Optional.empty();
 		}
