@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,22 +19,23 @@ public class ModelSubclassRepository implements BasicRepository<ModelSubclass> {
 
 	@Override
 	public Optional<ModelSubclass> getById(int id) {
+		
+		String query = "SELECT * FROM model_subclass WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM model_subclass WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					int classId = resultSet.getInt("class_id");
+					Optional<ModelClass> classCategory = modelClassRepository.getById(classId);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				int classId = resultSet.getInt("class_id");
-				Optional<ModelClass> classCategory = modelClassRepository.getById(classId);
-
-				if (classCategory.isPresent()) {
-					return Optional.of(new ModelSubclass(id, name, classCategory.get()));
+					if (classCategory.isPresent()) {
+						return Optional.of(new ModelSubclass(id, name, classCategory.get()));
+					}
 				}
 			}
 			return Optional.empty();
-
 		} catch (SQLException err) {
 			return Optional.empty();
 		}
