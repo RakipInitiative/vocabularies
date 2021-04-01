@@ -19,7 +19,7 @@ public class LaboratoryAccreditationRepository implements BasicRepository<Labora
 
 	@Override
 	public Optional<LaboratoryAccreditation> getById(int id) {
-		
+
 		String query = "SELECT * FROM laboratory_accreditation WHERE id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
