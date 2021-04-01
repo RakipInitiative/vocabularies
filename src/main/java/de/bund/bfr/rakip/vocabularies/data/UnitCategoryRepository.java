@@ -18,7 +18,7 @@ public class UnitCategoryRepository implements BasicRepository<UnitCategory> {
 
 	@Override
 	public Optional<UnitCategory> getById(int id) {
-		
+
 		String query = "SELECT * FROM unit_category WHERE id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
