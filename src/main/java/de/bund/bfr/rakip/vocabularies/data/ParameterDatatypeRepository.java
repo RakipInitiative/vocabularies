@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -18,21 +15,22 @@ public class ParameterDatatypeRepository implements BasicRepository<ParameterDat
 
 	@Override
 	public Optional<ParameterDatatype> getById(int id) {
+		
+		String query = "SELECT * FROM parameter_datatype WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_datatype WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String comment = resultSet.getString("comment");
+					String representedAs = resultSet.getString("represented_as");
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String comment = resultSet.getString("comment");
-				String representedAs = resultSet.getString("represented_as");
-
-				return Optional.of(new ParameterDatatype(id, name, comment, representedAs));
+					return Optional.of(new ParameterDatatype(id, name, comment, representedAs));
+				}
 			}
-
 			return Optional.empty();
-		} catch (SQLException e) {
+		} catch (SQLException err) {
 			return Optional.empty();
 		}
 	}
