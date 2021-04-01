@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,17 @@ public class HazardTypeRepository implements BasicRepository<HazardType> {
 	@Override
 	public Optional<HazardType> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM hazard_type WHERE id = " + id);
+		String query = "SELECT * FROM hazard_type WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				return Optional.of(new HazardType(id, name));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					return Optional.of(new HazardType(id, name));
+				}
+				return Optional.empty();
 			}
-
-			return Optional.empty();
 		} catch (SQLException err) {
 			return Optional.empty();
 		}
