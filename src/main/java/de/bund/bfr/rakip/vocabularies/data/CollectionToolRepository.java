@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,18 @@ public class CollectionToolRepository implements BasicRepository<CollectionTool>
 	@Override
 	public Optional<CollectionTool> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM collection_tool WHERE id = '" + id + "'");
+		String query = "SELECT * FROM collection_tool WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				return Optional.of(new CollectionTool(id, name));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					return Optional.of(new CollectionTool(id, name));
+				}
 			}
 			return Optional.empty();
-		} catch (SQLException e) {
+		} catch (SQLException err) {
 			return Optional.empty();
 		}
 	}
