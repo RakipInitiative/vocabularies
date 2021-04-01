@@ -1,13 +1,12 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import de.bund.bfr.rakip.vocabularies.domain.ParameterSource;
+
+import javax.xml.transform.Result;
 
 public class ParameterSourceRepository implements BasicRepository<ParameterSource> {
 
@@ -20,13 +19,15 @@ public class ParameterSourceRepository implements BasicRepository<ParameterSourc
 	@Override
 	public Optional<ParameterSource> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_source WHERE id = " + id);
+		String query = "SELECT * FROM parameter_source WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				return Optional.of(new ParameterSource(id, name));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					return Optional.of(new ParameterSource(id, name));
+				}
 			}
 			return Optional.empty();
 		} catch (SQLException err) {
