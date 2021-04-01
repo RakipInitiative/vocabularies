@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,15 +17,19 @@ public class SamplingProgramRepository implements BasicRepository<SamplingProgra
 	@Override
 	public Optional<SamplingProgram> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_program WHERE id = " + id);
+		String query = "SELECT * FROM sampling_program WHERE id = ?";
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String progType = resultSet.getString("progType");
-				return Optional.of(new SamplingProgram(id, name, progType));
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String progType = resultSet.getString("progType");
+					return Optional.of(new SamplingProgram(id, name, progType));
+				}
 			}
+
 			return Optional.empty();
 		} catch (SQLException err) {
 			return Optional.empty();
