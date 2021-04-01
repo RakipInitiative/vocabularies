@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,17 +16,20 @@ public class SourceRepository implements BasicRepository<Source> {
 
 	@Override
 	public Optional<Source> getById(int id) {
+		
+		String query = "SELECT * FROM sources WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sources WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String name = resultSet.getString("name");
+					String comment = resultSet.getString("comment");
 
-			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String comment = resultSet.getString("comment");
-
-				return Optional.of(new Source(id, name, comment));
+					return Optional.of(new Source(id, name, comment));
+				}
 			}
+
 			return Optional.empty();
 		} catch (SQLException err) {
 			return Optional.empty();
