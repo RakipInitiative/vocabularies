@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -18,20 +15,21 @@ public class AccreditationProcedureRepository implements BasicRepository<Accredi
 
 	@Override
 	public Optional<AccreditationProcedure> getById(int id) {
+		String query = "SELECT * FROM accreditation_procedure WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM accreditation_procedure WHERE id = " + id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String mdstat = resultSet.getString("mdstat");
+					String name = resultSet.getString("name");
 
-			if (resultSet.next()) {
-				String mdstat = resultSet.getString("mdstat");
-				String name = resultSet.getString("name");
-
-				return Optional.of(new AccreditationProcedure(id, mdstat, name));
+					return Optional.of(new AccreditationProcedure(id, mdstat, name));
+				}
 			}
 
 			return Optional.empty();
-		} catch (SQLException e) {
+		} catch (SQLException err) {
 			return Optional.empty();
 		}
 	}
