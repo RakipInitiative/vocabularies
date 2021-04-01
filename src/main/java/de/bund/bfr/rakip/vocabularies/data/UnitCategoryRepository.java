@@ -41,9 +41,8 @@ public class UnitCategoryRepository implements BasicRepository<UnitCategory> {
 
 		ArrayList<UnitCategory> categoryList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM unit_category");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM unit_category")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -61,9 +60,8 @@ public class UnitCategoryRepository implements BasicRepository<UnitCategory> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM unit_category");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM unit_category")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

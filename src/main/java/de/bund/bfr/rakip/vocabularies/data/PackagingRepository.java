@@ -40,9 +40,8 @@ public class PackagingRepository implements BasicRepository<Packaging> {
 	public Packaging[] getAll() {
 		ArrayList<Packaging> packagingList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM packaging");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM packaging")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class PackagingRepository implements BasicRepository<Packaging> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM packaging");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM packaging")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

@@ -40,9 +40,8 @@ public class LanguageRepository implements BasicRepository<Language> {
 
 		ArrayList<Language> languageList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM language");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM language")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -61,9 +60,8 @@ public class LanguageRepository implements BasicRepository<Language> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM language");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM language")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

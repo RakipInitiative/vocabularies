@@ -39,9 +39,8 @@ public class ModelEquationClassRepository implements BasicRepository<ModelEquati
 
 		ArrayList<ModelEquationClass> classList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM model_equation_class");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM model_equation_class")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");

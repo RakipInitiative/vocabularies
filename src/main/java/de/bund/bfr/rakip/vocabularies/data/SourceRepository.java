@@ -41,9 +41,8 @@ public class SourceRepository implements BasicRepository<Source> {
 
 		ArrayList<Source> sourceList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sources");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM sources")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class SourceRepository implements BasicRepository<Source> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM sources");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM sources")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

@@ -45,9 +45,8 @@ public class BasicProcessRepository implements BasicRepository<BasicProcess> {
 	public BasicProcess[] getAll() {
 		ArrayList<BasicProcess> subclasses = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM basic_process");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM basic_process")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -70,9 +69,8 @@ public class BasicProcessRepository implements BasicRepository<BasicProcess> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM basic_process");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM basic_process")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

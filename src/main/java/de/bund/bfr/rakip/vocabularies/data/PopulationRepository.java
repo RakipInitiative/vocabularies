@@ -38,9 +38,8 @@ public class PopulationRepository implements BasicRepository<Population> {
 	public Population[] getAll() {
 		ArrayList<Population> populationList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM population");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM population")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -59,9 +58,8 @@ public class PopulationRepository implements BasicRepository<Population> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM population");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM population")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

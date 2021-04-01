@@ -39,9 +39,8 @@ public class CountryRepository implements BasicRepository<Country> {
 
 		ArrayList<Country> countryList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM country");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM country")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class CountryRepository implements BasicRepository<Country> {
 
 		ArrayList<String> names = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM country");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM country")) {
 
 			while (resultSet.next()) {
 				names.add(resultSet.getString("name"));

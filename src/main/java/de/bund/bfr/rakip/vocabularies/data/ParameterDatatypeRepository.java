@@ -40,10 +40,8 @@ public class ParameterDatatypeRepository implements BasicRepository<ParameterDat
 
 		ArrayList<ParameterDatatype> availabilityList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_datatype");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_datatype")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -63,10 +61,8 @@ public class ParameterDatatypeRepository implements BasicRepository<ParameterDat
 	public String[] getAllNames() {
 		ArrayList<String> names = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-
-			ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_datatype");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_datatype")) {
 
 			while (resultSet.next()) {
 				names.add(resultSet.getString("name"));

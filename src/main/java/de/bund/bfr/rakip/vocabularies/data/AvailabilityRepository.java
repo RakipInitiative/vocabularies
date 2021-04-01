@@ -39,10 +39,8 @@ public class AvailabilityRepository implements BasicRepository<Availability> {
     	
         ArrayList<Availability> availabilityList = new ArrayList<>();
     	
-		try {
-			Statement statement = connection.createStatement();
-			
-	        ResultSet resultSet = statement.executeQuery("SELECT * FROM availability");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM availability")) {
 
 	        while (resultSet.next()) {
 	            int id = resultSet.getInt("id");
@@ -61,10 +59,8 @@ public class AvailabilityRepository implements BasicRepository<Availability> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    				
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM availability");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM availability")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

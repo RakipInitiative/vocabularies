@@ -42,9 +42,8 @@ public class FormatRepository implements BasicRepository<Format> {
 
 		ArrayList<Format> formatList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM format");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM format")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -64,9 +63,8 @@ public class FormatRepository implements BasicRepository<Format> {
 
 		ArrayList<String> names = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT name FROM format");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM format")) {
 
 			while (resultSet.next()) {
 				names.add(resultSet.getString("name"));

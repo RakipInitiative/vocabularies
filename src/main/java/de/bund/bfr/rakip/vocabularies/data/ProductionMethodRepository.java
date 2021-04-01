@@ -41,9 +41,8 @@ public class ProductionMethodRepository implements BasicRepository<ProductionMet
 
 		ArrayList<ProductionMethod> methodList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM prodmeth");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM prodmeth")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");

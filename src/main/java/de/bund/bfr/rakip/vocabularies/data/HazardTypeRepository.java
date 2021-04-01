@@ -38,9 +38,8 @@ public class HazardTypeRepository implements BasicRepository<HazardType> {
 
 		ArrayList<HazardType> typeList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM hazard_type");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM hazard_type")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -58,9 +57,8 @@ public class HazardTypeRepository implements BasicRepository<HazardType> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM hazard_type");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM hazard_type")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

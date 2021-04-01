@@ -40,9 +40,8 @@ public class RightRepository implements BasicRepository<Right> {
 
 		ArrayList<Right> rightList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM rights");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM rights")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class RightRepository implements BasicRepository<Right> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT fullname FROM rights");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT fullname FROM rights")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("fullname"));

@@ -42,9 +42,8 @@ public class LaboratoryAccreditationRepository implements BasicRepository<Labora
 	public LaboratoryAccreditation[] getAll() {
 		ArrayList<LaboratoryAccreditation> accreditations = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM laboratory_accreditation");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM laboratory_accreditation")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -64,9 +63,8 @@ public class LaboratoryAccreditationRepository implements BasicRepository<Labora
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM laboratory_accreditation");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM laboratory_accreditation")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

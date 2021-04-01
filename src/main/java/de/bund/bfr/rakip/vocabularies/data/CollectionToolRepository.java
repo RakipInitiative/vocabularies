@@ -38,9 +38,8 @@ public class CollectionToolRepository implements BasicRepository<CollectionTool>
 
 		ArrayList<CollectionTool> tools = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM collection_tool");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM collection_tool")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -58,9 +57,8 @@ public class CollectionToolRepository implements BasicRepository<CollectionTool>
 	public String[] getAllNames() {
 		ArrayList<String> names = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT name FROM collection_tool");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM collection_tool")) {
 
 			while (resultSet.next()) {
 				names.add(resultSet.getString("name"));

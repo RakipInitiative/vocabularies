@@ -41,9 +41,8 @@ public class PublicationTypeRepository implements BasicRepository<PublicationTyp
 
 		ArrayList<PublicationType> typeList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM publication_type");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM publication_type")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class PublicationTypeRepository implements BasicRepository<PublicationTyp
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT fullName FROM publication_type");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT fullName FROM publication_type")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("fullName"));

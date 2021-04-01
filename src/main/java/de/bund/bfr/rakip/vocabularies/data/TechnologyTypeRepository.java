@@ -65,10 +65,8 @@ public class TechnologyTypeRepository implements BasicRepository<TechnologyType>
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    				
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM technology_type");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM technology_type")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

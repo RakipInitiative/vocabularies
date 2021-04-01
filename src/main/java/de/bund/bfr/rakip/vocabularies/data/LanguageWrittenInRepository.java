@@ -37,9 +37,8 @@ public class LanguageWrittenInRepository implements BasicRepository<LanguageWrit
 	public LanguageWrittenIn[] getAll() {
 		ArrayList<LanguageWrittenIn> languageList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM language_written_in");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM language_written_in")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -56,9 +55,8 @@ public class LanguageWrittenInRepository implements BasicRepository<LanguageWrit
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM language_written_in");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM language_written_in")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

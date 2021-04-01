@@ -42,9 +42,8 @@ public class SamplingPointRepository implements BasicRepository<SamplingPoint> {
 
 		ArrayList<SamplingPoint> pointList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_point");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_point")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");

@@ -41,9 +41,8 @@ public class PublicationStatusRepository implements BasicRepository<PublicationS
 
 		ArrayList<PublicationStatus> statusList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM publication_status");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM publication_status")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class PublicationStatusRepository implements BasicRepository<PublicationS
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM publication_status");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM publication_status")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

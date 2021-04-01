@@ -41,9 +41,8 @@ public class ParameterDistributionRepository implements BasicRepository<Paramete
 
 		ArrayList<ParameterDistribution> distributions = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_distribution");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_distribution")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class ParameterDistributionRepository implements BasicRepository<Paramete
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_distribution");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_distribution")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

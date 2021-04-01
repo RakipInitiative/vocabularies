@@ -40,9 +40,8 @@ public class FishAreaRepository implements BasicRepository<FishArea> {
 
 		ArrayList<FishArea> areaList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM fish_area");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM fish_area")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class FishAreaRepository implements BasicRepository<FishArea> {
 
 		ArrayList<String> names = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT name FROM fish_area");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM fish_area")) {
 
 			while (resultSet.next()) {
 				names.add(resultSet.getString("name"));

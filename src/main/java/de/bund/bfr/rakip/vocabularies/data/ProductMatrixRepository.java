@@ -41,9 +41,8 @@ public class ProductMatrixRepository implements BasicRepository<ProductMatrix> {
 	public ProductMatrix[] getAll() {
 		ArrayList<ProductMatrix> matrixList = new ArrayList<>();
 		
-		try {			
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM product_matrix");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM product_matrix")) {
 			
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class ProductMatrixRepository implements BasicRepository<ProductMatrix> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM product_matrix");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM product_matrix")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

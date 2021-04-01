@@ -39,9 +39,8 @@ public class StatusRepository implements BasicRepository<Status> {
 	public Status[] getAll() {
 		ArrayList<Status> statuses = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM status");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM status")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -60,9 +59,8 @@ public class StatusRepository implements BasicRepository<Status> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM status");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM status")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

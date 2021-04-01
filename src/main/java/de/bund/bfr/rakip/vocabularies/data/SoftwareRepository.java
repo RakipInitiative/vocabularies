@@ -37,9 +37,8 @@ public class SoftwareRepository implements BasicRepository<Software> {
 	public Software[] getAll() {
 		ArrayList<Software> softwareList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM software");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM software")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -56,9 +55,8 @@ public class SoftwareRepository implements BasicRepository<Software> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM software");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM software")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

@@ -41,9 +41,8 @@ public class SamplingProgramRepository implements BasicRepository<SamplingProgra
 
 		ArrayList<SamplingProgram> programs = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_program");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_program")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -62,9 +61,8 @@ public class SamplingProgramRepository implements BasicRepository<SamplingProgra
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM sampling_program");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM sampling_program")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

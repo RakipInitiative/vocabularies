@@ -39,9 +39,8 @@ public class SamplingStrategyRepository implements BasicRepository<SamplingStrat
 
 		ArrayList<SamplingStrategy> strategies = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_strategy");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM sampling_strategy")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -60,9 +59,8 @@ public class SamplingStrategyRepository implements BasicRepository<SamplingStrat
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM sampling_strategy");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM sampling_strategy")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

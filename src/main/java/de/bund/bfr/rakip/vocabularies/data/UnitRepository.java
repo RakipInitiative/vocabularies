@@ -48,9 +48,8 @@ public class UnitRepository implements BasicRepository<Unit> {
 	public Unit[] getAll() {
 		ArrayList<Unit> units = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM unit");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM unit")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -74,9 +73,8 @@ public class UnitRepository implements BasicRepository<Unit> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM unit");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM unit")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

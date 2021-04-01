@@ -39,9 +39,8 @@ public class HazardRepository implements BasicRepository<Hazard> {
     	
         ArrayList<Hazard> hazardList = new ArrayList<>();
 
-    	try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM hazard");
+    	try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM hazard")) {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");

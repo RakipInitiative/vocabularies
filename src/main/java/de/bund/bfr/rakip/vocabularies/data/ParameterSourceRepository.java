@@ -40,9 +40,8 @@ public class ParameterSourceRepository implements BasicRepository<ParameterSourc
 
 		ArrayList<ParameterSource> subjectList = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_source");
+		try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT * FROM parameter_source")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -60,9 +59,8 @@ public class ParameterSourceRepository implements BasicRepository<ParameterSourc
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_source");
+    	try (Statement statement = connection.createStatement();
+    		 ResultSet resultSet = statement.executeQuery("SELECT name FROM parameter_source")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));

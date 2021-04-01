@@ -40,9 +40,8 @@ public class IndSumRepository implements BasicRepository<IndSum> {
 
 		ArrayList<IndSum> sums = new ArrayList<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM ind_sum");
+		try (Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM ind_sum")) {
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -61,9 +60,8 @@ public class IndSumRepository implements BasicRepository<IndSum> {
     public String[] getAllNames() {
     	ArrayList<String> names = new ArrayList<>();
     	
-    	try {
-    		Statement statement = connection.createStatement();
-    		ResultSet resultSet = statement.executeQuery("SELECT name FROM ind_sum");
+    	try (Statement statement = connection.createStatement();
+			 ResultSet resultSet = statement.executeQuery("SELECT name FROM ind_sum")) {
     		
     		while (resultSet.next()) {
     			names.add(resultSet.getString("name"));
