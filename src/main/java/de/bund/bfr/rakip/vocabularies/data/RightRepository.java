@@ -1,9 +1,6 @@
 package de.bund.bfr.rakip.vocabularies.data;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,16 +17,17 @@ public class RightRepository implements BasicRepository<Right> {
 	@Override
 	public Optional<Right> getById(int id) {
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM rights WHERE id = '" + id + "'");
+		String query = "SELECT * FROM rights WHERE id = ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					String shortname = resultSet.getString("shortname");
+					String fullname = resultSet.getString("fullname");
+					String url = resultSet.getString("url");
 
-			if (resultSet.next()) {
-				String shortname = resultSet.getString("shortname");
-				String fullname = resultSet.getString("fullname");
-				String url = resultSet.getString("url");
-
-				return Optional.of(new Right(id, shortname, fullname, url));
+					return Optional.of(new Right(id, shortname, fullname, url));
+				}
 			}
 			return Optional.empty();
 		} catch (SQLException err) {
