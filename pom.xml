@@ -61,8 +61,9 @@
 
 	<distributionManagement>
 		<repository>
-			<id>bintray</id>
-			<url>https://api.bintray.com/maven/silebat/maven_repo/vocabularies/;publish=1</url>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/RakipInitiative/vocabularies</url>
 		</repository>
 	</distributionManagement>
 
