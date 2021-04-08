@@ -1,3 +1,9 @@
+CREATE TABLE accreditation_procedure (
+    id INTEGER not NULL,
+    mdstat VARCHAR(6) not NULL,
+    name VARCHAR(128),
+    PRIMARY KEY (id));
+
 CREATE TABLE availability (
     id INTEGER not NULL,
     name VARCHAR(255) not NULL,
@@ -91,6 +97,19 @@ CREATE TABLE packaging (
     name VARCHAR(255) not NULL,
     ssd CHAR(5) not NULL, -- EFSA's SSD prodPackaging (xs:string(5))
     comment VARCHAR(255),
+    PRIMARY KEY(id));
+
+CREATE TABLE parameter_classification (
+    id INTEGER not NULL,
+    name VARCHAR(50) not NULL,
+    comment VARCHAR(255) not NULL,
+    PRIMARY KEY(id));
+
+CREATE TABLE parameter_datatype (
+    id INTEGER not NULL,
+    name VARCHAR(50) not NULL,
+    comment VARCHAR(512) not NULL,
+    represented_as VARCHAR(50) NOT NULL,
     PRIMARY KEY(id));
     
 CREATE TABLE parameter_distribution (
@@ -203,6 +222,13 @@ CREATE TABLE status (
     id INTEGER NOT NULL,
     name VARCHAR(10) NOT NULL,
     comment VARCHAR(128),
+    PRIMARY KEY(id));
+
+CREATE TABLE technology_type (
+    id INTEGER NOT NULL,
+    ssd VARCHAR(6) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    comment VARCHAR(255),
     PRIMARY KEY(id));
     
 CREATE TABLE unit_category (
