@@ -1,14 +1,15 @@
-INSERT INTO model_class (id, name) VALUES (0, '(Data)');
-INSERT INTO model_class (id, name) VALUES (1, 'Consumption model');
-INSERT INTO model_class (id, name) VALUES (2, 'Dose-response model');
-INSERT INTO model_class (id, name) VALUES (3, 'Exposure model');
-INSERT INTO model_class (id, name) VALUES (4, 'Health metrics model');
-INSERT INTO model_class (id, name) VALUES (5, 'Other Empirical models');
-INSERT INTO model_class (id, name) VALUES (6, 'Predictive model');
-INSERT INTO model_class (id, name) VALUES (7, 'Process model');
-INSERT INTO model_class (id, name) VALUES (8, 'QRA model');
-INSERT INTO model_class (id, name) VALUES (9, 'Risk characterization model');
-INSERT INTO model_class (id, name) VALUES (10, 'Toxicological reference value model');
+INSERT INTO model_class (id, name) VALUES (0, 'Generic model');
+INSERT INTO model_class (id, name) VALUES (1, '(Data)');
+INSERT INTO model_class (id, name) VALUES (2, 'Consumption model');
+INSERT INTO model_class (id, name) VALUES (3, 'Dose-response model');
+INSERT INTO model_class (id, name) VALUES (4, 'Exposure model');
+INSERT INTO model_class (id, name) VALUES (5, 'Health metrics model');
+INSERT INTO model_class (id, name) VALUES (6, 'Other Empirical models');
+INSERT INTO model_class (id, name) VALUES (7, 'Predictive model');
+INSERT INTO model_class (id, name) VALUES (8, 'Process model');
+INSERT INTO model_class (id, name) VALUES (9, 'QRA model');
+INSERT INTO model_class (id, name) VALUES (10, 'Risk characterization model');
+INSERT INTO model_class (id, name) VALUES (11, 'Toxicological reference value model');
 
 -- Predictive models
 INSERT INTO model_subclass (id, name, class_id) VALUES (0, 'Growth', 6);
